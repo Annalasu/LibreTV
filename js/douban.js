@@ -10,11 +10,19 @@ const doubanPageSize = 16; // 一次显示的项目数量
 
 // 初始化豆瓣功能
 function initDouban() {
-    // 设置豆瓣开关的初始状态
     const doubanToggle = document.getElementById('doubanToggle');
     if (doubanToggle) {
-        const doubanEnabled = localStorage.getItem('doubanEnabled');
-        const isEnabled = doubanEnabled === null ? true : doubanEnabled === 'true';
+        // 获取 localStorage 中的值
+        let doubanEnabled = localStorage.getItem('doubanEnabled');
+        
+        // 如果没有值，设置默认值为 'true'
+        if (doubanEnabled === null) {
+            localStorage.setItem('doubanEnabled', 'true');
+            doubanEnabled = 'true'; // 更新变量值
+        }
+        
+        // 设置开关状态
+        const isEnabled = doubanEnabled === 'true';
         doubanToggle.checked = isEnabled;
         
         // 设置开关外观
