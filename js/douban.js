@@ -231,11 +231,9 @@ function renderDoubanMovieTvSwitch() {
             
             // 初始加载热门内容
             if (localStorage.getItem('doubanEnabled') === 'true') {
-                console.log("豆瓣功能已启用，正在渲染推荐内容");
+                // console.log("");
                 renderRecommend(doubanCurrentTag, doubanPageSize, doubanPageStart);
-            } else {
-                console.log("豆瓣功能已禁用，跳过渲染");
-            }
+            } 
         }
     });
 }
