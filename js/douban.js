@@ -10,19 +10,10 @@ const doubanPageSize = 16; // 一次显示的项目数量
 
 // 初始化豆瓣功能
 function initDouban() {
+    // 设置豆瓣开关的初始状态
     const doubanToggle = document.getElementById('doubanToggle');
     if (doubanToggle) {
-        // 获取 localStorage 中的值
-        let doubanEnabled = localStorage.getItem('doubanEnabled');
-        
-        // 如果没有值，设置默认值为 'true'
-        if (doubanEnabled === null) {
-            localStorage.setItem('doubanEnabled', 'true');
-            doubanEnabled = 'true'; // 更新变量值
-        }
-        
-        // 设置开关状态
-        const isEnabled = doubanEnabled === 'true';
+        const isEnabled = localStorage.getItem('doubanEnabled') !== 'false';
         doubanToggle.checked = isEnabled;
         
         // 设置开关外观
@@ -68,7 +59,7 @@ function initDouban() {
     setupDoubanRefreshBtn();
     
     // 初始加载热门内容
-    if (localStorage.getItem('doubanEnabled') === 'true') {
+    if (localStorage.getItem('doubanEnabled') !== 'false') {
         renderRecommend(doubanCurrentTag, doubanPageSize, doubanPageStart);
     }
 }
@@ -78,7 +69,7 @@ function updateDoubanVisibility() {
     const doubanArea = document.getElementById('doubanArea');
     if (!doubanArea) return;
     
-    const isEnabled = localStorage.getItem('doubanEnabled') === 'true';
+    const isEnabled = localStorage.getItem('doubanEnabled') !== 'false';
     const isSearching = document.getElementById('resultsArea') && 
         !document.getElementById('resultsArea').classList.contains('hidden');
     
@@ -204,7 +195,7 @@ function renderDoubanMovieTvSwitch() {
             setupDoubanRefreshBtn();
             
             // 初始加载热门内容
-            if (localStorage.getItem('doubanEnabled') === 'true') {
+            if (localStorage.getItem('doubanEnabled') !== 'false') {
                 renderRecommend(doubanCurrentTag, doubanPageSize, doubanPageStart);
             }
         }
@@ -230,10 +221,9 @@ function renderDoubanMovieTvSwitch() {
             setupDoubanRefreshBtn();
             
             // 初始加载热门内容
-            if (localStorage.getItem('doubanEnabled') === 'true') {
-                // console.log("");
+            if (localStorage.getItem('doubanEnabled') !== 'false') {
                 renderRecommend(doubanCurrentTag, doubanPageSize, doubanPageStart);
-            } 
+            }
         }
     });
 }
